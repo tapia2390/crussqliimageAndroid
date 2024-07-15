@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Students</string>
+    <string name="name">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="registrar">Registrar</string>
+    <string name="observaciones">Observaciones</string>
+    <string name="registar_estudiante">Registar Estudiante</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="actualzar_datos">Actualzar datos</string>
+</resources>
