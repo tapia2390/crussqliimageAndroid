@@ -67,6 +67,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         statement.executeUpdateDelete();
     }
 
+    public void deleteStudent(int studentId) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "DELETE FROM STUDENT WHERE Id = ?";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindLong(1, studentId); // Enlazar el ID del estudiante
+
+        statement.executeUpdateDelete();
+    }
+
 
     public Cursor getData(String sql){
         SQLiteDatabase database = getReadableDatabase();
