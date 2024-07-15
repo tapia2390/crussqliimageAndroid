@@ -1,8 +1,12 @@
 package com.vhalency.students;
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -27,6 +31,7 @@ public class EstudentAdapter extends RecyclerView.Adapter<EstudentAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, lastname;
+        public Button update;
         public CircleImageView thumbnail;
 
 
@@ -35,6 +40,8 @@ public class EstudentAdapter extends RecyclerView.Adapter<EstudentAdapter.MyView
             name = view.findViewById(R.id.name);
             lastname = view.findViewById(R.id.lastname);
             thumbnail = view.findViewById(R.id.thumbnail);
+            update = view.findViewById(R.id.btnedit);
+
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,6 +78,15 @@ public class EstudentAdapter extends RecyclerView.Adapter<EstudentAdapter.MyView
                 .load(student.getImage())
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.thumbnail);
+
+        holder.update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditStudent.class);
+                intent.putExtra("id",student.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements EstudentAdapter.S
 
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private List<Student> contactList;
     private EstudentAdapter mAdapter;
     private SearchView searchView;
 
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements EstudentAdapter.S
         searchView = (SearchView) findViewById(R.id.searchView);
 
 
-        initi();
 
       //  mAdapter.notifyDataSetChanged();
 
@@ -82,14 +80,16 @@ public class MainActivity extends AppCompatActivity implements EstudentAdapter.S
     }
 
     private void initi() {
-        contactList = new ArrayList<>();
 
         sqLiteHelper = new SQLiteHelper(this, "StudentDB.sqlite", null, 1);
         list = new ArrayList<>();
         // get all data from sqlite
+        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS STUDENT (Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, lastname VARCHAR, image BLOB, observation VARCHAR)");
+
         Cursor cursor = sqLiteHelper.getData("SELECT * FROM STUDENT");
+        if (cursor != null && cursor.moveToFirst()) {
         list.clear();
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
             String lastname = cursor.getString(2);
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements EstudentAdapter.S
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
         recyclerView.setAdapter(mAdapter);
 
+    }
     }
 
     @Override
